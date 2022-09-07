@@ -2,11 +2,15 @@ import json
 
 def to_parse_csv(): # It's function parsing .csv file
     f = open('to_parse.csv', 'r') 
-    lines = [line.rstrip() for line in f]  # rstrip() delet /n in the end str
+    lines = [line.rstrip() for line in f] # rstrip() delet /n in the end str
     results = []
     for line in lines:
         words = line.split(',')
-        results.append((words[0], words[1], words[2]))
+
+        results.append(
+            (words[0],words[1],words[2])
+                        )
+
     keys = results[0]
     val1 = results[1]
     val2 = results[2]
