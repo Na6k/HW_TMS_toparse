@@ -1,24 +1,11 @@
-import json
-from textwrap import indent    
+import json   
+
 
 def to_parse_csv(): # It's function parsing .csv file
     with open('to_parse.csv', 'r') as f: 
-        lines = [line.rstrip() for line in f] # rstrip() delet /n in the end str
-
-    results = []
-    for line in lines:
-        words = line.split(',')
-
-        results.append(
-            (words[0],words[1],words[2])
-                        )    
-    ls = []
-    for i in range(1,len(results)):
-        keys = results[0]
-        val = results[i]
-        a = list(zip(keys, val))
-        ls.append(dict(a))
-    return ls
+        head = f.readline().strip().split(',') # strip() delet /n in the end str, split() separation string sep=','
+        res = [dict(zip(head, line.strip().split(','))) for line in f] 
+    return res
 
 
 def show(parse=None): # It's function to print result
