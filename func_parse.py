@@ -1,26 +1,24 @@
-import json    
+import json
+from textwrap import indent    
 
 def to_parse_csv(): # It's function parsing .csv file
-    f = open('to_parse.csv', 'r') 
-    lines = [line.rstrip() for line in f] # rstrip() delet /n in the end str
+    with open('to_parse.csv', 'r') as f: 
+        lines = [line.rstrip() for line in f] # rstrip() delet /n in the end str
+
     results = []
     for line in lines:
         words = line.split(',')
 
         results.append(
             (words[0],words[1],words[2])
-                        )
-
-    keys = results[0]
-    val1 = results[1]
-    val2 = results[2]
-    a1 = list(zip(keys, val1))
-    a2 = list(zip(keys, val2))
-    lst = []
-    lst.append(dict(a1))
-    lst.append(dict(a2))
-    f.close()
-    return lst
+                        )    
+    ls = []
+    for i in range(1,len(results)):
+        keys = results[0]
+        val = results[i]
+        a = list(zip(keys, val))
+        ls.append(dict(a))
+    return ls
 
 
 def show(parse=None): # It's function to print result
@@ -28,8 +26,8 @@ def show(parse=None): # It's function to print result
 
 
 def save_to_json(saving=None): #It's function save this result in file .json format 
-    with open('save_to_parse.json', 'w') as file_json:
-        json.dump(saving, file_json)
+    with open('save_to_parse.json', 'w' ) as file_json:
+        json.dump(saving, file_json, indent=4)
 
 
 def main():
